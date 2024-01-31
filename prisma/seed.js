@@ -2,21 +2,21 @@ import crypto from 'crypto';
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-async function main() {
+function genHash(input) {
 	const salt = crypto.randomBytes(64).toString('hex');
-	const hashedPassword = crypto.scryptSync('Aquas123$', salt, 64).toString('hex');
+	const hashedPassword = crypto.scryptSync(input, salt, 64).toString('hex');
 
-	console.log(`${salt}&${hashedPassword}`)
-	
-	const admin = await prisma.user.create({
-		data: {
-			name: 'Frank',
-			role: 'admin',
-			password: `${salt}&${hashedPassword}`
-		}
+	return `${salt}&${hashedPassword}`;
+}
+
+async function main() {
+	const users = await prisma.user.createMany({
+		data: [
+			{ name: 'Frank', role: 'admin', password: genHash('Aquas123$') },
+			{ name: 'Nico', role: 'employee', password: genHash('pass') },
+		],
+		skipDuplicates: true
 	});
-
-	console.log(admin);
 }
 
 main()

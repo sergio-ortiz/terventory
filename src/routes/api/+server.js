@@ -1,7 +1,7 @@
 import { json } from '@sveltejs/kit';
 
 export async function DELETE({ cookies }) {
-	cookies.delete('signedIn', { path: '/' });
+	cookies.delete('session', { path: '/' });
 
-	return json(cookies.get('signedIn'));
+	return json(cookies.get('session'));
 }

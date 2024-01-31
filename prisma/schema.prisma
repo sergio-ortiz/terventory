@@ -16,4 +16,5 @@ model User {
   name     String @unique
   password String @db.Char(257)
   role     String
+  session  String? @unique
 }
