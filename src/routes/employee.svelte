@@ -1,1 +1,4 @@
-<h1>Hello Employee</h1>
+<script>
+	export let name;
+</script>
+<h1>Hello {name}</h1>

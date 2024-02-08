@@ -1,1 +1,1 @@
-<h1>Hello Admin</h1>
+<a href='/admin' class="btn btn-primary">Users</a>
