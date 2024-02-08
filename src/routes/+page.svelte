@@ -1,5 +1,7 @@
 <script>
 	export let data;
+	import Admin from './admin.svelte';
+	import Employee from './employee.svelte';
 </script>
 
 <div class="container mx-auto flex flex-col items-center">
@@ -16,7 +18,15 @@
 				d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
 			/></svg
 		>
-		<span>Successfully logged in! {data.role} {data.name}</span>
+		<span>Successfully Logged In!</span>
+	</div>
+
+	<div class="mt-5">
+		{#if data.role === 'employee'}
+			<Employee />	
+		{:else if data.role === 'admin'}
+			<Admin />
+		{/if}
 	</div>
 
 	<form method="POST">
