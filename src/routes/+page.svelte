@@ -24,7 +24,7 @@
 	{/if}
 	<div class="pt-6">
 		<div class="card w-96 shadow-xl">
-			<form method="POST" class="card-body" use:enhance>
+			<form method="POST" action="?/signin" class="card-body" use:enhance>
 				<div class="form-control">
 					<label for="name" class="label">
 						<span class="label-text">Name:</span>

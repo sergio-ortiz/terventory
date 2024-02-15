@@ -13,7 +13,7 @@ export async function load({ cookies }) {
 }
 
 export const actions = {
-	default: async ({ cookies, request }) => {
+	signin: async ({ cookies, request }) => {
 		const data = await request.formData();
 
 		const name = data.get('name');
@@ -51,5 +51,8 @@ export const actions = {
 				error: 'Incorrect username and password.'
 			});
 		}
+	},
+	signout: ({ cookies }) => {
+		cookies.delete('session', { path: '/' });
 	}
 };
