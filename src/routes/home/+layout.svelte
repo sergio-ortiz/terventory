@@ -1,5 +1,9 @@
-<slot />
+<div class="navbar shadow-xl">
+	<form method="POST" action="/?/signout" class="navbar-end w-full">
+		<button class="btn">Sign Out</button>
+	</form>
+</div>
 
-<form method="POST" action="/?/signout">
-	<button class="btn mt-6">Sign Out</button>
-</form>
+<div class="container mx-auto flex flex-col items-center">
+	<slot />
+</div>

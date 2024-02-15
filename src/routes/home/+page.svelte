@@ -5,7 +5,7 @@
 	import Employee from './employee.svelte';
 </script>
 
-<div class="alert alert-success">
+<div class="alert alert-success mt-6">
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		class="stroke-current shrink-0 h-6 w-6"
