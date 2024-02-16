@@ -3,7 +3,8 @@ import { redirect } from '@sveltejs/kit';
 
 const prisma = new PrismaClient();
 
-export async function load({ cookies }) {
+export async function load({ cookies, url }) {
+	const success = url.searchParams.has('success');
 	const session = cookies.get('session');
 
 	try {
@@ -17,7 +18,8 @@ export async function load({ cookies }) {
 
 		return {
 			name,
-			role
+			role,
+			success
 		};
 	} catch (error) {
 		redirect(302, '/');

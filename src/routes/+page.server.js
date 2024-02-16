@@ -1,19 +1,20 @@
 import crypto from 'crypto';
-import { fail, redirect } from '@sveltejs/kit';
+import { redirect, fail } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
-
 const prisma = new PrismaClient();
 
 export async function load({ cookies }) {
 	const session = cookies.get('session');
 
 	if (session) {
-		redirect(307, '/home');
+		redirect(302, '/home');
 	}
 }
 
 export const actions = {
 	signin: async ({ cookies, request }) => {
+		let success;
+
 		const data = await request.formData();
 
 		const name = data.get('name');
@@ -41,6 +42,7 @@ export const actions = {
 				});
 
 				cookies.set('session', session, { path: '/' });
+				success = true;
 			} else {
 				throw new Error('crypto timing safe equal returned false');
 			}
@@ -51,6 +53,8 @@ export const actions = {
 				error: 'Incorrect username and password.'
 			});
 		}
+
+		if (success) redirect(303, '/home?success');
 	},
 	signout: ({ cookies }) => {
 		cookies.delete('session', { path: '/' });

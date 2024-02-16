@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 export const actions = {
 	default: async ({ request }) => {
 		const data = await request.formData();
-		
+
 		const name = data.get('name');
 		const password = data.get('password');
 		const role = data.get('role');
@@ -15,15 +15,14 @@ export const actions = {
 
 		const dbPass = `${salt}&${hashedPassword}`;
 
-
 		const user = await prisma.user.create({
 			data: {
 				name,
 				password: dbPass,
-				role,
+				role
 			}
-		})
+		});
 
 		console.log(user);
 	}
-}
+};

@@ -1,5 +1,5 @@
 <div class="navbar shadow-xl">
-	<form method="POST" action="/?/signout" class="navbar-end w-full">
+	<form method="POST" action="/?/signout" class="navbar-end w-full container mx-auto">
 		<button class="btn">Sign Out</button>
 	</form>
 </div>
