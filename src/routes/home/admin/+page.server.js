@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import { fail } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
@@ -15,14 +16,25 @@ export const actions = {
 
 		const dbPass = `${salt}&${hashedPassword}`;
 
-		const user = await prisma.user.create({
-			data: {
-				name,
-				password: dbPass,
-				role
+		try {
+			const user = await prisma.user.create({
+				data: {
+					name,
+					password: dbPass,
+					role
+				}
+			});
+			if (user) {
+				return {
+					success: 'User successfully created.'
+				};
 			}
-		});
-
-		console.log(user);
+		} catch (error) {
+			if (error.code === 'P2002') {
+				return fail(422, {
+					error: 'Username already taken.'
+				});
+			}
+		}
 	}
 };

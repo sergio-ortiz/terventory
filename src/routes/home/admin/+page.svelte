@@ -1,10 +1,48 @@
+<script>
+	import { enhance } from '$app/forms';
+
+	export let form;
+</script>
+
 <article class="prose">
 	<h1 class="mt-6">Create User</h1>
 </article>
-
 <div class="pt-6">
 	<div class="card w-96 shadow-xl">
-		<form method="POST" class="card-body">
+		{#if form?.error}
+			<div class="alert alert-error">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="stroke-current shrink-0 h-6 w-6"
+					fill="none"
+					viewBox="0 0 24 24"
+					><path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+					/></svg
+				>
+				<span>{form.error}</span>
+			</div>
+		{:else if form?.success}
+			<div class="alert alert-success">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="stroke-current shrink-0 h-6 w-6"
+					fill="none"
+					viewBox="0 0 24 24"
+					><path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+					/></svg
+				>
+				<span>{form.success}</span>
+			</div>
+		{/if}
+		<form method="POST" class="card-body" use:enhance>
 			<div class="form-control">
 				<label for="name" class="label">
 					<span class="label-text">Name:</span>
