@@ -35,13 +35,16 @@ export const actions = {
 			const match = crypto.timingSafeEqual(hashedPassword, hashBuff);
 
 			if (match) {
-				const { session } = await prisma.user.update({
+				const { session, role } = await prisma.user.update({
 					where: { name },
 					data: { session: crypto.randomUUID() },
-					select: { session: true }
+					select: { session: true, role: true }
 				});
 
 				cookies.set('session', session, { path: '/' });
+				if (role === 'admin') {
+					cookies.set('admin', true, { path: '/' });
+				}
 				success = true;
 			} else {
 				throw new Error('crypto timing safe equal returned false');
@@ -58,5 +61,6 @@ export const actions = {
 	},
 	signout: ({ cookies }) => {
 		cookies.delete('session', { path: '/' });
+		cookies.set('admin', false, { path: '/' });
 	}
 };
