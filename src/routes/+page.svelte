@@ -44,7 +44,7 @@
 					/>
 				</div>
 				<div class="form-control mt-6">
-					<button class="btn">Submit</button>
+					<button class="btn btn-primary">Submit</button>
 				</div>
 			</form>
 		</div>
